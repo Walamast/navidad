@@ -81,6 +81,7 @@ body{
 
 .fold{
   position: relative;
+  cursor: pointer;
   width: 100%;
   height: var(--cardH);
   perspective: 1400px;
@@ -517,4 +518,72 @@ body{
   }
 
   .stamp{ right: 12px; top: 12px; transform: scale(.92); transform-origin: top right; }
+}
+
+
+/* ==========================================================
+   iOS / móvil: lectura completa (sin recortes) + animación
+   ========================================================== */
+
+/* Animación extra: “pop” sutil al abrir/cerrar */
+.fold.is-opening { animation: popOpen 520ms cubic-bezier(.2,.9,.2,1); }
+.fold.is-closing { animation: popClose 520ms cubic-bezier(.2,.9,.2,1); }
+
+@keyframes popOpen {
+  0%   { transform: translateY(0); }
+  40%  { transform: translateY(-2px); }
+  100% { transform: translateY(0); }
+}
+@keyframes popClose {
+  0%   { transform: translateY(0); }
+  60%  { transform: translateY(1px); }
+  100% { transform: translateY(0); }
+}
+
+/* Revelado del contenido interior */
+.inside{
+  opacity: 0;
+  transform: translateY(8px);
+  filter: blur(1px);
+  transition: opacity 280ms ease, transform 280ms ease, filter 280ms ease;
+}
+.fold.is-open .inside{
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition-delay: 140ms;
+}
+
+/* En móvil, el interior puede exceder la altura: habilitamos scroll interno */
+@media (max-width: 860px){
+  /* Altura basada en viewport (evita recortes) */
+  .fold{
+    height: clamp(640px, 84vh, 860px);
+  }
+
+  /* El interior se puede desplazar si el contenido excede */
+  .fold__inside{
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Evita que el grid fuerce altura y recorte texto */
+  .inside{
+    height: auto;
+    align-content: start;
+  }
+}
+
+/* Ajustes tipográficos adicionales en pantallas pequeñas */
+@media (max-width: 520px){
+  .message{ 
+    font-size: 15px;
+    line-height: 1.56;
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+  .message--big{
+    font-size: 19px;
+    line-height: 1.34;
+  }
 }
