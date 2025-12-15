@@ -484,3 +484,37 @@ body{
   justify-items: start;
   align-content: center;
 }
+
+
+/* ----------------------------------------------------------
+   Ajustes móviles: evitar texto "entrecortado" y cortes por altura
+   ---------------------------------------------------------- */
+
+@media (max-width: 860px){
+  .message{ margin-top: 28px; }
+}
+
+@media (max-width: 520px){
+  .inside__col{ padding: 22px 18px 18px; }
+  .headline__feliz{ font-size: 44px; }
+  .headline__navidad{ font-size: 50px; }
+
+  .message{
+    margin-top: 24px;
+    font-size: 15px;
+    line-height: 1.52;
+  }
+
+  .message--big{
+    margin-top: 18px;
+    font-size: 19px;
+    line-height: 1.32;
+  }
+
+  .signature{
+    margin-top: 22px;
+    font-size: 15px;
+  }
+
+  .stamp{ right: 12px; top: 12px; transform: scale(.92); transform-origin: top right; }
+}
