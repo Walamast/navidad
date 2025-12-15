@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tarjeta Navideña Minimalista</title>
+    <link rel="stylesheet" href="diseno.css" />
+    <script src="interacciones.js" defer></script>
+  </head>
+
+  <body>
+    <main class="page">
+<section class="stage" aria-label="Tarjeta navideña">
+        <div
+          class="fold"
+          id="fold"
+          role="button"
+          tabindex="0"
+          aria-label="Presiona y mantén para abrir la tarjeta"
+          aria-pressed="false"
+        >
+          <!-- Interior -->
+          <div class="fold__inside" aria-hidden="true">
+            <div class="inside">
+              <div class="inside__col inside__col--left">
+                <div class="headline">
+                  <div class="headline__feliz">Feliz</div>
+                  <div class="headline__navidad">navidad</div>
+                </div>
+
+                <div class="reindeerWrap" aria-hidden="true">
+                  <!-- Reno minimal (SVG) -->
+                  <svg class="reindeer" viewBox="0 0 220 220">
+                    <!-- luces (cable) -->
+                    <path class="lights__wire" d="M 35 65 C 70 35, 150 35, 185 65" />
+                    <circle class="lights__bulb b1" cx="55" cy="55" r="6" />
+                    <circle class="lights__bulb b2" cx="85" cy="45" r="6" />
+                    <circle class="lights__bulb b3" cx="115" cy="42" r="6" />
+                    <circle class="lights__bulb b4" cx="145" cy="45" r="6" />
+                    <circle class="lights__bulb b5" cx="170" cy="55" r="6" />
+
+                    <!-- cuernos -->
+                    <path class="antler" d="M 72 78 C 60 55, 70 35, 80 25 C 75 40, 85 52, 92 60" />
+                    <path class="antler" d="M 148 78 C 160 55, 150 35, 140 25 C 145 40, 135 52, 128 60" />
+
+                    <!-- cabeza -->
+                    <ellipse class="head" cx="110" cy="120" rx="58" ry="52" />
+                    <!-- hocico -->
+                    <ellipse class="snout" cx="110" cy="142" rx="44" ry="30" />
+                    <!-- ojos -->
+                    <circle class="eye" cx="92" cy="118" r="6" />
+                    <circle class="eye" cx="128" cy="118" r="6" />
+                    <!-- nariz -->
+                    <ellipse class="nose" cx="110" cy="146" rx="14" ry="11" />
+                    <!-- boca -->
+                    <path class="smile" d="M 96 156 C 105 164, 115 164, 124 156" />
+                  </svg>
+                </div>
+              </div>
+
+              <div class="inside__divider" aria-hidden="true"></div>
+
+              <div class="inside__col inside__col--right">
+                <div class="stamp" aria-hidden="true">
+                  <div class="stamp__icon">
+                    <div class="stamp__belt"></div>
+                    <div class="stamp__buckle"></div>
+                  </div>
+                  <svg class="stamp__waves" viewBox="0 0 120 34">
+                    <path d="M 5 8 C 22 2, 38 14, 55 8 C 72 2, 88 14, 105 8" />
+                    <path d="M 5 18 C 22 12, 38 24, 55 18 C 72 12, 88 24, 105 18" />
+                    <path d="M 5 28 C 22 22, 38 34, 55 28 C 72 22, 88 34, 105 28" />
+                  </svg>
+                </div>
+
+                <p class="message">
+                  Con cariño y buenos deseos en esta Navidad, que la alegría llene tu hogar y la paz reine en tu corazón.
+                  Que cada momento esté rodeado de amor y felicidad.
+                </p>
+
+                <p class="message message--big">
+                  ¡Felices fiestas y un próspero Año Nuevo!
+                </p>
+
+                <p class="signature">
+                  Con amor, de la familia <span class="signature__name">Lam Astudillo</span>
+                </p>
+
+                <div class="microCircuit" aria-hidden="true">
+                  <div class="microCircuit__trace"></div>
+                  <span class="microCircuit__dot"></span>
+                  <span class="microCircuit__dot"></span>
+                  <span class="microCircuit__dot"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Portada (cierra sobre el interior) -->
+          <div class="fold__cover" id="cover">
+            <div class="cover">
+              <div class="cover__border" aria-hidden="true"></div>
+
+              <div class="cover__content">
+                <div class="cover__photoFrame" aria-label="Foto familiar de portada">
+                  <img class="cover__photo" src="lam.jpg" alt="Foto familiar" />
+                </div>
+                <h2 class="cover__title">Feliz Navidad</h2>
+              </div>
+
+              <div class="cover__shadow" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+</section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,486 @@
+/* ==========================================================
+   Tarjeta Navideña Minimalista (press-to-open)
+   Archivos: diseno.css
+   ========================================================== */
+
+:root{
+  --bg: #f6efe6;
+  --panel: rgba(0,0,0,.035);
+  --panelBorder: rgba(0,0,0,.08);
+  --txt: rgba(0,0,0,.86);
+  --muted: rgba(0,0,0,.55);
+
+  --paper: #f6efe6;
+  --paper2:#f3eadf;
+  --ink: #1d1f23;
+
+  --red: #b02a2a;
+  --red2:#8f1f1f;
+  --brown:#6a4a2a;
+
+  --radius: 22px;
+  --shadow: rgba(0,0,0,.45);
+
+  --cardW: min(860px, 100%);
+  --cardH: 520px;
+
+  --dividerW: 6px;
+}
+
+*{ box-sizing: border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  background: var(--bg);
+  color: var(--txt);
+}
+
+
+.page{
+  min-height:100%;
+  padding: 24px 18px 34px;
+  display: grid;
+  place-items: center;
+}
+
+
+.header{
+  max-width: 1100px;
+  width: 100%;
+}
+
+.header__title{
+  margin:0;
+  font-size: clamp(18px, 2.4vw, 28px);
+  letter-spacing:.2px;
+}
+
+.header__subtitle{
+  margin: 10px 0 0;
+  color: var(--muted);
+  line-height:1.35;
+  max-width: 80ch;
+  font-size: 13px;
+}
+
+.stage{
+  width: var(--cardW);
+  max-width: 1100px;
+  background: rgba(255,255,255,.55);
+  border: 1px solid var(--panelBorder);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 16px 40px rgba(0,0,0,.08);
+}
+
+
+/* ----------------------------------------------------------
+   Plegado 3D
+   ---------------------------------------------------------- */
+
+.fold{
+  position: relative;
+  width: 100%;
+  height: var(--cardH);
+  perspective: 1400px;
+  border-radius: var(--radius);
+  outline: none;
+}
+
+.fold:focus-visible{
+  outline: 3px solid rgba(255,255,255,.22);
+  outline-offset: 6px;
+  border-radius: calc(var(--radius) + 8px);
+}
+
+.fold__inside,
+.fold__cover{
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+/* Interior (base) */
+.fold__inside{
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.06), transparent 30%),
+    repeating-linear-gradient(90deg, rgba(0,0,0,.016) 0px, rgba(0,0,0,.016) 1px, transparent 8px, transparent 14px),
+    var(--paper2);
+  box-shadow: 0 1px 0 rgba(255,255,255,.16) inset;
+}
+
+/* Cover (gira) */
+.fold__cover{
+  transform-origin: left center;
+  transform: rotateY(0deg);
+  transition: transform 520ms cubic-bezier(.2,.9,.2,1);
+  box-shadow: 0 30px 80px var(--shadow);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* “Presionado”: abre */
+.fold.is-open .fold__cover{
+  transform: rotateY(-155deg);
+}
+
+/* ----------------------------------------------------------
+   Interior: dos páginas
+   ---------------------------------------------------------- */
+
+.inside{
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr var(--dividerW) 1fr;
+  color: var(--ink);
+}
+
+@media (max-width: 860px){
+  :root{ --cardH: 740px; }
+  .inside{
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  .inside__divider{ display:none; }
+}
+
+.inside__col{
+  padding: 26px 26px 22px;
+  position: relative;
+}
+
+.inside__divider{
+  background: linear-gradient(180deg, transparent, var(--red), transparent);
+  width: var(--dividerW);
+  opacity: .85;
+}
+
+.headline{
+  margin-top: 4px;
+  line-height: .95;
+}
+
+.headline__feliz{
+  font-size: 56px;
+  letter-spacing: .5px;
+  color: var(--red2);
+  font-weight: 800;
+}
+
+.headline__navidad{
+  font-size: 64px;
+  letter-spacing: .2px;
+  color: var(--red);
+  font-weight: 900;
+}
+
+/* Reno */
+.reindeerWrap{
+  margin-top: 18px;
+  display: grid;
+  place-items: center;
+}
+
+.reindeer{
+  width: min(320px, 92%);
+  height: auto;
+}
+
+.lights__wire{
+  fill: none;
+  stroke: rgba(0,0,0,.55);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.lights__bulb{ opacity: .92; }
+.b1{ fill: #e65b5b; }
+.b2{ fill: #5aa7ff; }
+.b3{ fill: #5bd17a; }
+.b4{ fill: #ffd15a; }
+.b5{ fill: #c98aff; }
+
+.antler{
+  fill: none;
+  stroke: var(--brown);
+  stroke-width: 9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.head{ fill: #cfa57b; }
+.snout{ fill: #e1c19b; }
+.eye{ fill: #1b1b1b; }
+.nose{ fill: #c52e2e; }
+.smile{
+  fill:none;
+  stroke: rgba(0,0,0,.55);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+/* Columna derecha: mensaje */
+.message{
+  margin: 70px 0 0;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.55;
+  color: rgba(0,0,0,.68);
+}
+
+.message--big{
+  margin-top: 24px;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: .2px;
+  color: var(--red);
+}
+
+.signature{
+  margin: 36px 0 0;
+  text-align: center;
+  font-size: 16px;
+  color: rgba(0,0,0,.70);
+}
+
+.signature__name{
+  font-weight: 900;
+  color: var(--red2);
+}
+
+/* Sello */
+.stamp{
+  position: absolute;
+  right: 18px;
+  top: 16px;
+  display: grid;
+  gap: 6px;
+  justify-items: end;
+}
+
+.stamp__icon{
+  width: 44px;
+  height: 54px;
+  background: #c44343;
+  border-radius: 10px;
+  position: relative;
+  border: 1px solid rgba(0,0,0,.12);
+  box-shadow: 0 12px 24px rgba(0,0,0,.12);
+  overflow: hidden;
+}
+
+.stamp__icon::before{
+  content:"";
+  position:absolute;
+  inset: 0;
+  background: radial-gradient(18px 18px at 20% 18%, rgba(255,255,255,.55), transparent 60%);
+}
+
+.stamp__belt{
+  position:absolute;
+  left:0;
+  right:0;
+  top: 26px;
+  height: 10px;
+  background: #2b2b2b;
+}
+
+.stamp__buckle{
+  position:absolute;
+  width: 14px;
+  height: 12px;
+  right: 9px;
+  top: 25px;
+  border: 3px solid #f2c14f;
+  border-radius: 3px;
+  background: transparent;
+}
+
+.stamp__waves{
+  width: 120px;
+  height: 34px;
+}
+.stamp__waves path{
+  fill:none;
+  stroke: rgba(0,0,0,.55);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+
+/* Micro “paper circuit” decorativo */
+.microCircuit{
+  margin: 34px auto 0;
+  width: min(260px, 92%);
+  position: relative;
+  height: 26px;
+}
+
+.microCircuit__trace{
+  position:absolute;
+  left:0; right:0; top: 50%;
+  height: 6px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, transparent, rgba(176,42,42,.55), transparent);
+  border-radius: 999px;
+  opacity: .9;
+}
+
+.microCircuit__dot{
+  position:absolute;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  transform: translateY(-50%);
+  background: rgba(176,42,42,.22);
+  border: 1px solid rgba(0,0,0,.14);
+}
+
+.microCircuit__dot:nth-child(2){ left: 18%; }
+.microCircuit__dot:nth-child(3){ left: 50%; transform: translate(-50%,-50%); }
+.microCircuit__dot:nth-child(4){ right: 18%; }
+
+/* Al abrir: animación sutil en microcircuito */
+.fold.is-open .microCircuit__dot{
+  background: rgba(176,42,42,.78);
+  box-shadow: 0 0 12px rgba(176,42,42,.45);
+  animation: twinkle 1.35s ease-in-out infinite;
+}
+.fold.is-open .microCircuit__dot:nth-child(2){ animation-delay: .0s; }
+.fold.is-open .microCircuit__dot:nth-child(3){ animation-delay: .22s; }
+.fold.is-open .microCircuit__dot:nth-child(4){ animation-delay: .44s; }
+
+@keyframes twinkle{
+  0%,100%{ opacity: .75; transform: translateY(-50%) scale(1.00); }
+  50%{ opacity: 1; transform: translateY(-50%) scale(1.14); }
+}
+
+/* ----------------------------------------------------------
+   Cover minimal
+   ---------------------------------------------------------- */
+
+.cover{
+  position: relative;
+  height: 100%;
+  backface-visibility: hidden;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.06), transparent 30%),
+    repeating-linear-gradient(90deg, rgba(0,0,0,.016) 0px, rgba(0,0,0,.016) 1px, transparent 8px, transparent 14px),
+    var(--paper);
+}
+
+.cover__border{
+  position:absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  background:
+    linear-gradient(90deg, transparent 0 12px,
+      rgba(176,42,42,.95) 12px 18px,
+      transparent 18px calc(100% - 18px),
+      rgba(176,42,42,.95) calc(100% - 18px) calc(100% - 12px),
+      transparent calc(100% - 12px) 100%);
+  opacity: .9;
+}
+
+.cover__content{
+  position: relative;
+  height: 100%;
+  padding: 26px 26px 22px;
+  color: var(--ink);
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 12px;
+}
+
+.cover__badge{
+  display: inline-flex;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.12);
+  background: rgba(255,255,255,.55);
+  font-size: 12px;
+  font-weight: 800;
+  color: rgba(0,0,0,.65);
+}
+
+.cover__title{
+  margin:0;
+  font-size: 44px;
+  letter-spacing: .2px;
+  color: var(--red);
+}
+
+.cover__hint{
+  margin:0;
+  color: rgba(0,0,0,.62);
+  font-size: 14px;
+  line-height:1.35;
+  max-width: 52ch;
+}
+
+.cover__mark{
+  display:flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.mark__dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(176,42,42,.35);
+  border: 1px solid rgba(0,0,0,.12);
+}
+
+.fold.is-open .mark__dot{
+  background: rgba(176,42,42,.80);
+  box-shadow: 0 0 12px rgba(176,42,42,.40);
+}
+
+.cover__shadow{
+  position:absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  box-shadow: 0 1px 0 rgba(255,255,255,.18) inset;
+  pointer-events:none;
+}
+
+/* Texto de ayuda */
+.help{
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .fold__cover{ transition:none; }
+  .fold.is-open .microCircuit__dot{ animation:none; }
+}
+
+
+/* Portada: foto familiar */
+.cover__photoFrame{
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,.12);
+  box-shadow: 0 18px 44px rgba(0,0,0,.12);
+  aspect-ratio: 16 / 9;
+  background: rgba(0,0,0,.05);
+}
+.cover__photo{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+.cover__content{
+  gap: 16px;
+  justify-items: start;
+  align-content: center;
+}
